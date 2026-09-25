@@ -1,0 +1,503 @@
+/* ==========================================
+   5ROSE CUSTOMER UI — VERSION 1
+   ========================================== */
+
+:root {
+    --primary: #075b3a;
+    --primary-dark: #06452e;
+    --primary-light: #e8f4ec;
+
+    --background: #f8faf8;
+    --surface: #ffffff;
+
+    --text: #173b2c;
+    --muted: #77857c;
+
+    --border: #e8eeea;
+    --gold: #ffb400;
+    --danger: #e5484d;
+
+    --radius: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: Inter, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* MAIN MOBILE LAYOUT */
+
+.customer-app {
+    width: 100%;
+    max-width: 480px;
+    min-height: 100vh;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+.customer-content {
+    padding: 20px 18px 45px;
+}
+
+/* HEADER */
+
+.customer-header {
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: white;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.brand-name {
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: -0.4px;
+}
+
+.brand-location {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+}
+
+.verified {
+    color: #0da86d;
+}
+
+/* HERO */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+    padding: 26px 20px;
+    border-radius: 20px;
+    background: linear-gradient(
+        135deg,
+        #fff9ee,
+        #f6faef,
+        #edf6ef
+    );
+}
+
+.hero-title {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.8px;
+}
+
+.hero-rating {
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.rating-number {
+    font-size: 36px;
+    font-weight: 800;
+}
+
+.rating-stars {
+    color: var(--gold);
+    letter-spacing: 1px;
+    font-size: 21px;
+}
+
+.hero-description {
+    margin: 14px 0 20px;
+    font-size: 13px;
+    color: #65766b;
+    line-height: 1.7;
+}
+
+.primary-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+    min-height: 49px;
+
+    border: none;
+    border-radius: 12px;
+
+    background: var(--primary);
+    color: #ffffff;
+
+    font-weight: 700;
+    font-size: 14px;
+
+    transition: background 0.2s ease,
+                transform 0.2s ease;
+}
+
+.primary-button:hover {
+    background: var(--primary-dark);
+}
+
+.primary-button:active {
+    transform: scale(0.98);
+}
+
+.primary-button:disabled {
+    background: #a5aba7;
+    cursor: not-allowed;
+}
+
+/* SECTION HEADINGS */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+
+    margin: 30px 0 15px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.section-link {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* REVIEW CARDS */
+
+.review-card {
+    padding: 17px;
+    margin-bottom: 10px;
+
+    border: 1px solid var(--border);
+    border-radius: 17px;
+
+    background: white;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.025);
+}
+
+.review-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.review-avatar {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #e3ebe5;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.review-name {
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.review-date {
+    margin-left: auto;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+.review-stars {
+    margin-top: 6px;
+    color: var(--gold);
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.product-tag {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 9px;
+
+    border-radius: 20px;
+    background: #fff0f0;
+    color: #b23b41;
+
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.review-text {
+    margin: 12px 0 0;
+    font-size: 12px;
+    line-height: 1.7;
+    color: #33483c;
+}
+
+/* FEEDBACK PAGE */
+
+.feedback-heading {
+    margin: 18px 0 22px;
+}
+
+.feedback-heading h1 {
+    margin: 0;
+    font-size: 23px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.feedback-heading p {
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.feedback-card {
+    padding: 20px 16px;
+    margin-bottom: 12px;
+
+    border: 1px solid #f0f2f0;
+    border-radius: 18px;
+
+    background: white;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.035);
+}
+
+.field-label {
+    display: block;
+    margin-bottom: 11px;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* STAR RATING */
+
+.star-rating {
+    display: flex;
+    justify-content: space-between;
+    gap: 3px;
+}
+
+.star-button {
+    width: 45px;
+    height: 48px;
+    padding: 0;
+
+    background: transparent;
+    border: none;
+
+    font-size: 39px;
+    color: #d5d8d6;
+
+    transition: color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.star-button.selected {
+    color: var(--gold);
+}
+
+.star-button:hover {
+    transform: scale(1.1);
+}
+
+.star-button:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 8px;
+}
+
+.rating-description {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+/* FORM FIELDS */
+
+.form-field {
+    margin-bottom: 23px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+
+    padding: 14px;
+    border: 1px solid #dce4de;
+    border-radius: 12px;
+
+    background: #ffffff;
+    color: var(--text);
+
+    outline: none;
+    font-size: 13px;
+
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.6;
+}
+
+.character-count {
+    margin-top: 7px;
+    text-align: right;
+    font-size: 10px;
+    color: var(--muted);
+}
+
+/* VALIDATION */
+
+.error-message {
+    display: none;
+    margin-top: 7px;
+    color: var(--danger);
+    font-size: 11px;
+}
+
+.has-error .error-message {
+    display: block;
+}
+
+.has-error .form-control {
+    border-color: var(--danger);
+}
+
+/* SUCCESS */
+
+.success-card {
+    padding: 45px 24px;
+    border-radius: 20px;
+    background: white;
+    text-align: center;
+}
+
+.success-icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: #dff2e5;
+    color: var(--primary);
+
+    font-size: 40px;
+}
+
+.success-card h2 {
+    font-size: 23px;
+    line-height: 1.3;
+}
+
+.success-card p {
+    margin: 15px 0 25px;
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 768px) {
+
+    .customer-app {
+        margin: 35px auto;
+        min-height: calc(100vh - 70px);
+
+        border: 1px solid #e8eeea;
+        border-radius: 28px;
+        overflow: hidden;
+
+        box-shadow: 0 20px 70px rgba(0,0,0,0.07);
+    }
+
+}
+
+@media (max-width: 360px) {
+
+    .customer-content {
+        padding: 15px 12px 35px;
+    }
+
+    .star-button {
+        width: 41px;
+        font-size: 35px;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
+}
