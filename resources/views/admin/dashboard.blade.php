@@ -109,6 +109,16 @@
             Moderation Dashboard.
         </p>
 
+        <a
+            href="{{ route('admin.feedback.index') }}"
+            class="mt-6 inline-flex
+                   rounded-xl bg-[#08784b]
+                   px-6 py-3
+                   text-sm font-bold text-white"
+        >
+            Manage Customer Feedback →
+        </a>
+
     </div>
 
 </div>

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
+use App\Http\Controllers\Admin\FeedbackModerationController;
 
 Route::get('/', function () {
     return view('customer.home');
@@ -50,5 +51,31 @@ Route::middleware([
         '/logout',
         [AdminAuthController::class, 'logout']
     )->name('logout');
+
+
+    Route::get(
+        '/feedback',
+        [FeedbackModerationController::class, 'index']
+    )->name('feedback.index');
+
+    Route::get(
+        '/feedback/{feedback}',
+        [FeedbackModerationController::class, 'show']
+    )->name('feedback.show');
+
+    Route::patch(
+        '/feedback/{feedback}/approve',
+        [FeedbackModerationController::class, 'approve']
+    )->name('feedback.approve');
+
+    Route::patch(
+        '/feedback/{feedback}/reject',
+        [FeedbackModerationController::class, 'reject']
+    )->name('feedback.reject');
+
+    Route::patch(
+        '/feedback/{feedback}/pending',
+        [FeedbackModerationController::class, 'moveToPending']
+    )->name('feedback.pending');
 
 });
