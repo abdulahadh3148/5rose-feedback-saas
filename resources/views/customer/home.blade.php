@@ -1,124 +1,634 @@
 @extends('layouts.customer')
 
-@section('title', '5Rose Cool Bar | Customer Experience')
+@section('title', '5Rose Cool Bar | Good Food. Brighter Days.')
+
+@push('styles')
+    @vite('resources/css/customer-home.css')
+@endpush
+
+@push('scripts')
+    @vite('resources/js/customer-home.js')
+@endpush
 
 @section('content')
-<main class="customer-content pb-20">
-    
-    <!-- Premium Hero Section -->
-    <section class="relative overflow-hidden rounded-[28px] p-8 mt-2 bg-gradient-to-br from-[#f2f9f5] via-[#e2f1e8] to-[#d4eadb] shadow-sm border border-white/60">
-        <!-- Decorative blobs -->
-        <div class="absolute -top-10 -right-10 w-40 h-40 bg-[#cce3d5] rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse"></div>
-        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-[#e8f4ec] rounded-full mix-blend-multiply filter blur-2xl opacity-70"></div>
-        
-        <div class="relative z-10">
-            <h1 class="text-[34px] font-extrabold text-[#06452e] leading-[1.1] tracking-[-1px] mb-4">
-                Good Food.<br>Brighter Days.
-            </h1>
-            <p class="text-[#4a6356] text-[14px] leading-relaxed mb-6 font-medium max-w-[280px]">
-                Fresh drinks, delicious food and happy moments. Your experience matters to us.
-            </p>
-            
-            <div class="flex items-center gap-3 mb-6 bg-white/60 backdrop-blur-sm rounded-full py-2 px-4 w-max border border-white/50 shadow-sm">
-                <span class="text-[#ffb400] text-lg tracking-widest">★★★★★</span>
-                <span class="text-[12px] font-bold text-[#06452e]">Top Rated</span>
-            </div>
-            
-            <a href="#reviews" class="inline-flex items-center justify-center gap-2 bg-[#075b3a] hover:bg-[#06452e] text-white px-6 py-3.5 rounded-xl font-bold text-[14px] transition-all duration-300 shadow-[0_8px_20px_rgba(7,91,58,0.2)] hover:shadow-[0_10px_25px_rgba(7,91,58,0.3)] hover:-translate-y-0.5 w-full sm:w-auto">
-                Explore Reviews 
-                <span class="text-xl leading-none ml-1">→</span>
+
+<div class="rose-site">
+
+    {{-- =========================
+         HEADER
+    ========================== --}}
+
+    <header class="rose-header" id="siteHeader">
+
+        <div class="rose-container rose-nav">
+
+            <a
+                href="{{ route('customer.home') }}"
+                class="rose-brand"
+                aria-label="5Rose Cool Bar home"
+            >
+
+                <div class="rose-logo-shell">
+
+                    <img
+                        src="{{ asset('images/5rose/logo.png') }}"
+                        alt="5Rose Cool Bar"
+                        class="rose-logo"
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';"
+                    >
+
+                    <span class="rose-logo-fallback">
+                        🌹
+                    </span>
+
+                </div>
+
+                <div class="rose-brand-text">
+
+                    <strong>5Rose</strong>
+
+                    <span>COOL BAR</span>
+
+                </div>
+
             </a>
-        </div>
-    </section>
 
-    <!-- Menu Section -->
-    <section id="menu" class="mt-10">
-        <div class="flex items-center justify-between mb-5 px-1">
-            <h2 class="text-xl font-extrabold text-[#173b2c] tracking-tight">Try Something New 🍹</h2>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <!-- Card 1 -->
-            <article class="group relative bg-white p-5 rounded-[22px] border border-[#e8eeea] shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_12px_30px_rgba(7,91,58,0.08)] hover:-translate-y-1 overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 group-hover:opacity-20 transition-all duration-500 origin-bottom-left">🥑</div>
-                <div class="relative z-10">
-                    <span class="inline-block px-3 py-1 bg-[#e8f4ec] text-[#075b3a] text-[10px] font-bold rounded-full mb-3 uppercase tracking-wider">Fresh Drink</span>
-                    <h3 class="text-[17px] font-bold text-[#173b2c] mb-1">Avocado Milkshake</h3>
-                    <p class="text-[13px] text-[#77857c] font-medium">Creamy, rich and perfectly sweet.</p>
-                </div>
-            </article>
-            
-            <!-- Card 2 -->
-            <article class="group relative bg-white p-5 rounded-[22px] border border-[#e8eeea] shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_12px_30px_rgba(7,91,58,0.08)] hover:-translate-y-1 overflow-hidden">
-                <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 group-hover:opacity-20 transition-all duration-500 origin-bottom-left">🍨</div>
-                <div class="relative z-10">
-                    <span class="inline-block px-3 py-1 bg-[#fff6e0] text-[#b38000] text-[10px] font-bold rounded-full mb-3 uppercase tracking-wider">Customer Favourite</span>
-                    <h3 class="text-[17px] font-bold text-[#173b2c] mb-1">Falooda</h3>
-                    <p class="text-[13px] text-[#77857c] font-medium">A refreshing sweet treat with ice cream.</p>
-                </div>
-            </article>
-            
-            <!-- Card 3 -->
-            <article class="group relative bg-white p-5 rounded-[22px] border border-[#e8eeea] shadow-[0_4px_20px_rgba(0,0,0,0.02)] transition-all duration-300 hover:shadow-[0_12px_30px_rgba(7,91,58,0.08)] hover:-translate-y-1 overflow-hidden sm:col-span-2">
-                <div class="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 group-hover:opacity-20 transition-all duration-500 origin-bottom-left">🍍</div>
-                <div class="relative z-10">
-                    <span class="inline-block px-3 py-1 bg-[#f0f2f4] text-[#4b5563] text-[10px] font-bold rounded-full mb-3 uppercase tracking-wider">Recommended</span>
-                    <h3 class="text-[17px] font-bold text-[#173b2c] mb-1">Fresh Fruit Juice</h3>
-                    <p class="text-[13px] text-[#77857c] font-medium">Made to order with seasonal fresh fruits.</p>
-                </div>
-            </article>
-        </div>
-    </section>
 
-    <!-- Feedback CTA Section -->
-    <section class="mt-10 mb-6">
-        <div class="relative overflow-hidden bg-[#075b3a] rounded-[24px] p-7 sm:p-9 text-center shadow-[0_15px_40px_rgba(7,91,58,0.25)]">
-            <!-- Background effects -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-[#054029] to-transparent opacity-80"></div>
-            <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
-            
-            <div class="relative z-10 flex flex-col items-center">
-                <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center text-3xl mb-4 backdrop-blur-sm border border-white/20">
-                    ❤️
+            <nav
+                class="rose-desktop-nav"
+                aria-label="Main navigation"
+            >
+
+                <a href="#home">Home</a>
+                <a href="#discover">Discover</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#connect">Connect</a>
+
+            </nav>
+
+
+            <a
+                href="{{ route('customer.feedback') }}"
+                class="rose-header-feedback"
+            >
+
+                Share Feedback
+
+                <span>↗</span>
+
+            </a>
+
+
+            <button
+                id="menuToggle"
+                class="rose-menu-button"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+
+            </button>
+
+        </div>
+
+
+        {{-- MOBILE MENU --}}
+
+        <nav
+            id="mobileMenu"
+            class="rose-mobile-menu"
+            aria-label="Mobile navigation"
+            hidden
+        >
+
+            <a href="#home">Home</a>
+
+            <a href="#discover">
+                Discover Our Menu
+            </a>
+
+            <a href="#reviews">
+                Customer Reviews
+            </a>
+
+            <a href="#gallery">
+                Gallery
+            </a>
+
+            <a href="#connect">
+                Stay Connected
+            </a>
+
+            <a
+                href="{{ route('customer.feedback') }}"
+                class="rose-mobile-review"
+            >
+
+                Write a Review
+
+                <span>↗</span>
+
+            </a>
+
+        </nav>
+
+    </header>
+
+
+
+    {{-- =========================
+         HERO
+    ========================== --}}
+
+    <section
+        id="home"
+        class="rose-hero"
+    >
+
+        <div class="rose-noise"></div>
+
+        <div class="rose-orb rose-orb-one"></div>
+        <div class="rose-orb rose-orb-two"></div>
+
+        <div class="rose-container rose-hero-grid">
+
+            {{-- HERO COPY --}}
+
+            <div class="rose-hero-copy">
+
+                <div
+                    class="rose-eyebrow rose-animate"
+                    data-delay="0"
+                >
+
+                    <span class="rose-status-dot"></span>
+
+                    FRESH MOMENTS START HERE
+
                 </div>
-                <h2 class="text-[22px] font-extrabold text-white mb-2 tracking-tight">We Value Your Feedback</h2>
-                <p class="text-[#a7cbbd] text-[14px] font-medium mb-7 max-w-[260px] mx-auto leading-relaxed">
-                    Tell us what you loved and how we can make your next visit even better.
+
+
+                <h1
+                    class="rose-hero-heading rose-animate"
+                    data-delay="100"
+                >
+
+                    GOOD FOOD.
+
+                    <span>
+                        BRIGHTER
+                        <em>DAYS.</em>
+                    </span>
+
+                </h1>
+
+
+                <p
+                    class="rose-hero-description rose-animate"
+                    data-delay="180"
+                >
+
+                    More than just a drink.
+
+                    Discover refreshing flavours,
+                    delicious food and happy moments
+                    made with care at 5Rose Cool Bar.
+
                 </p>
-                
-                <a href="{{ route('customer.feedback') }}" class="inline-flex items-center justify-center gap-2 bg-white text-[#075b3a] px-8 py-4 rounded-xl font-bold text-[15px] transition-transform duration-300 hover:scale-105 active:scale-95 shadow-lg w-full sm:w-auto">
-                    Give Feedback Now
-                    <span class="text-xl leading-none ml-1">→</span>
+
+
+                <div
+                    class="rose-hero-actions rose-animate"
+                    data-delay="260"
+                >
+
+                    <a
+                        href="{{ route('customer.feedback') }}"
+                        class="rose-main-button"
+                    >
+
+                        <span>
+                            Share Your Experience
+                        </span>
+
+                        <span class="rose-button-arrow">
+                            ↗
+                        </span>
+
+                    </a>
+
+
+                    <a
+                        href="#discover"
+                        class="rose-secondary-link"
+                    >
+
+                        Explore 5Rose
+
+                        <span>↓</span>
+
+                    </a>
+
+                </div>
+
+
+                <div
+                    class="rose-trust-row rose-animate"
+                    data-delay="340"
+                >
+
+                    <span class="rose-trust-icon">
+                        ✦
+                    </span>
+
+                    <span>
+                        Fresh drinks · Great taste · Happy people
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            {{-- HERO VISUAL --}}
+
+            <div
+                class="rose-hero-visual rose-animate"
+                data-delay="170"
+                id="heroVisual"
+            >
+
+                <div class="rose-visual-ring"></div>
+
+                <div class="rose-image-frame">
+
+                    <img
+                        src="{{ asset('images/5rose/rose-falooda.jpg') }}"
+                        alt="5Rose Cool Bar Royal Rose Falooda"
+                        class="rose-hero-image"
+                        id="heroImage"
+                        onerror="this.style.display='none';"
+                    >
+
+                    <div class="rose-image-fallback">
+
+                        <span class="rose-fallback-small">
+                            5ROSE
+                        </span>
+
+                        <strong>
+                            FRESH
+                        </strong>
+
+                        <span>
+                            GOOD VIBES
+                        </span>
+
+                    </div>
+
+                    <div class="rose-image-shade"></div>
+
+                </div>
+
+
+                <div
+                    class="rose-float-card rose-float-top"
+                >
+
+                    <span class="rose-float-icon">
+                        ✦
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Freshly Made
+                        </strong>
+
+                        <span>
+                            Prepared with care
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    class="rose-float-card rose-float-bottom"
+                >
+
+                    <span class="rose-float-icon">
+                        ♡
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            Happy Moments
+                        </strong>
+
+                        <span>
+                            Made at 5Rose
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="rose-vertical-word">
+                    COOL BAR · KURUNEGALA
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="#discover"
+            class="rose-scroll-indicator"
+        >
+
+            <span>
+                SCROLL TO DISCOVER
+            </span>
+
+            <div class="rose-scroll-line">
+
+                <span></span>
+
+            </div>
+
+        </a>
+
+    </section>
+
+
+
+    {{-- =========================
+         DISCOVER MENU
+    ========================== --}}
+    <section id="discover" class="rose-discover">
+        <div class="rose-container">
+            <div class="rose-section-head text-center">
+                <span class="rose-section-badge">✦ HANDCRAFTED FRESH DAILY</span>
+                <h2 class="rose-section-title">Discover Our <em>Signature Taste</em></h2>
+                <p class="rose-section-subtitle">
+                    Crafted with genuine passion, premium ingredients, and the authentic flavours that make every sip and bite unforgettable.
+                </p>
+            </div>
+
+            <div class="rose-categories-grid">
+                {{-- Category 1: Fresh Juices & Milkshakes --}}
+                <div class="rose-category-card">
+                    <div class="rose-category-banner">
+                        <img src="{{ asset('images/5rose/juices-milkshakes-banner.jpg') }}" alt="Fresh Juices and Milkshakes at 5Rose" loading="lazy">
+                        <div class="rose-category-banner-overlay">
+                            <span class="rose-category-pill">🥤 Fresh Juices &amp; Shakes</span>
+                            <h3>Pure Fruits &amp; Chilled Milkshakes</h3>
+                        </div>
+                    </div>
+                    <div class="rose-category-items">
+                        <div class="rose-spotlight-item">
+                            <div class="rose-spotlight-img-wrap">
+                                <img src="{{ asset('images/5rose/rose-falooda.jpg') }}" alt="Royal Rose Falooda" loading="lazy">
+                                <span class="rose-spotlight-badge">Signature</span>
+                            </div>
+                            <div class="rose-spotlight-info">
+                                <div class="rose-spotlight-title-row">
+                                    <h4>Royal Rose Falooda</h4>
+                                    <span class="rose-item-tag">Top Seller</span>
+                                </div>
+                                <p>Chilled rose milk, sweet basil seeds, silky vermicelli, topped with premium vanilla ice cream &amp; chopped nuts.</p>
+                            </div>
+                        </div>
+
+                        <div class="rose-spotlight-item">
+                            <div class="rose-spotlight-img-wrap">
+                                <img src="{{ asset('images/5rose/papaya-juice.jpg') }}" alt="Tropical Fresh Papaya Juice" loading="lazy">
+                                <span class="rose-spotlight-badge">Healthy</span>
+                            </div>
+                            <div class="rose-spotlight-info">
+                                <div class="rose-spotlight-title-row">
+                                    <h4>Tropical Papaya Juice</h4>
+                                    <span class="rose-item-tag">100% Pure</span>
+                                </div>
+                                <p>Freshly pressed sun-ripened papaya, rich in natural vitamins and served refreshingly ice-cold.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- Category 2: Snacks & Desserts --}}
+                <div class="rose-category-card">
+                    <div class="rose-category-banner">
+                        <img src="{{ asset('images/5rose/snacks-desserts-banner.jpg') }}" alt="5Rose Snacks and Desserts" loading="lazy">
+                        <div class="rose-category-banner-overlay">
+                            <span class="rose-category-pill">🍰 Snacks &amp; Desserts</span>
+                            <h3>Sweet Indulgence &amp; Savoury Bites</h3>
+                        </div>
+                    </div>
+                    <div class="rose-category-items">
+                        <div class="rose-spotlight-item">
+                            <div class="rose-spotlight-img-wrap">
+                                <img src="{{ asset('images/5rose/fruit-salad.jpg') }}" alt="Special Fruit Salad with Ice Cream" loading="lazy">
+                                <span class="rose-spotlight-badge">Dessert</span>
+                            </div>
+                            <div class="rose-spotlight-info">
+                                <div class="rose-spotlight-title-row">
+                                    <h4>Fruit Salad Sundae</h4>
+                                    <span class="rose-item-tag">Must Try</span>
+                                </div>
+                                <p>Fresh seasonal fruit medley tossed with sweet raisins, honey drizzle, and crowned with rich vanilla ice cream.</p>
+                            </div>
+                        </div>
+
+                        <div class="rose-spotlight-item">
+                            <div class="rose-spotlight-img-wrap">
+                                <img src="{{ asset('images/5rose/snacks-desserts-banner.jpg') }}" alt="Hot Savoury Snacks" loading="lazy" style="object-position: center bottom;">
+                                <span class="rose-spotlight-badge">Hot</span>
+                            </div>
+                            <div class="rose-spotlight-info">
+                                <div class="rose-spotlight-title-row">
+                                    <h4>Crispy Savoury Bites</h4>
+                                    <span class="rose-item-tag">Freshly Fried</span>
+                                </div>
+                                <p>Golden vegetable samosas, spicy egg rolls, crumbed cutlets, and savoury wraps prepared fresh daily.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {{-- =========================
+         CUSTOMER REVIEWS
+    ========================== --}}
+    <section id="reviews" class="rose-reviews">
+        <div class="rose-container">
+            <div class="rose-section-head text-center">
+                <span class="rose-section-badge">★ TESTIMONIALS</span>
+                <h2 class="rose-section-title">Loved by <em>Kurunegala</em></h2>
+                <p class="rose-section-subtitle">Real experiences shared by our valued customers who visit us for their daily refreshment.</p>
+            </div>
+
+            <div class="rose-reviews-grid">
+                <div class="rose-review-card">
+                    <div class="rose-review-stars">★★★★★</div>
+                    <p class="rose-review-text">“The Royal Rose Falooda here is hands down the best in the area! The layers of ice cream, basil seeds and jelly are perfectly balanced.”</p>
+                    <div class="rose-review-author">
+                        <div class="rose-avatar">AF</div>
+                        <div>
+                            <strong>Ahamed Farhan</strong>
+                            <span>Regular Visitor</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rose-review-card">
+                    <div class="rose-review-stars">★★★★★</div>
+                    <p class="rose-review-text">“Fresh Papaya juice and hot crispy egg rolls are my daily evening stop after work. Always clean, fast, and welcoming staff.”</p>
+                    <div class="rose-review-author">
+                        <div class="rose-avatar">NP</div>
+                        <div>
+                            <strong>Nadeesha Perera</strong>
+                            <span>Local Foodie</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rose-review-card">
+                    <div class="rose-review-stars">★★★★★</div>
+                    <p class="rose-review-text">“The Fruit Salad with Ice Cream is loaded with fresh, crisp fruit cubes and heavenly honey syrup. My kids absolutely love it!”</p>
+                    <div class="rose-review-author">
+                        <div class="rose-avatar">KS</div>
+                        <div>
+                            <strong>Kavinda Silva</strong>
+                            <span>Family Diners</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="rose-feedback-prompt">
+                <div class="rose-feedback-prompt-content">
+                    <h3>Have you visited 5Rose Cool Bar recently?</h3>
+                    <p>We cherish your feedback and use it to craft even better experiences for you.</p>
+                </div>
+                <a href="{{ route('customer.feedback') }}" class="rose-main-button">
+                    <span>Share Your Review</span>
+                    <span class="rose-button-arrow">↗</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Reviews Section Placeholder -->
-    <section id="reviews" class="mt-10">
-        <div class="flex items-center justify-between mb-5 px-1">
-            <h2 class="text-xl font-extrabold text-[#173b2c] tracking-tight">Recent Reviews ⭐</h2>
-        </div>
-        <div class="bg-white rounded-[20px] p-8 border border-dashed border-[#dce4de] text-center">
-            <div class="text-4xl mb-3 opacity-50 grayscale">💬</div>
-            <p class="text-[14px] font-medium text-[#77857c]">No published reviews yet.<br>Be the first to share your experience!</p>
+    {{-- =========================
+         GALLERY
+    ========================== --}}
+    <section id="gallery" class="rose-gallery">
+        <div class="rose-container">
+            <div class="rose-section-head text-center">
+                <span class="rose-section-badge">📸 VISUAL TREATS</span>
+                <h2 class="rose-section-title">A Feast for <em>the Eyes</em></h2>
+                <p class="rose-section-subtitle">A glimpse into our freshly crafted drinks, vibrant bowls, and tempting savoury selections.</p>
+            </div>
+
+            <div class="rose-gallery-grid">
+                <div class="rose-gallery-item rose-gallery-wide">
+                    <img src="{{ asset('images/5rose/juices-milkshakes-banner.jpg') }}" alt="Fresh Juices and Milkshakes Spread" loading="lazy">
+                    <div class="rose-gallery-overlay">
+                        <span>Signature Lineup</span>
+                        <h4>Fresh Juices &amp; Milkshakes</h4>
+                    </div>
+                </div>
+
+                <div class="rose-gallery-item">
+                    <img src="{{ asset('images/5rose/rose-falooda.jpg') }}" alt="Signature Royal Rose Falooda" loading="lazy">
+                    <div class="rose-gallery-overlay">
+                        <span>Cold Delicacy</span>
+                        <h4>Royal Rose Falooda</h4>
+                    </div>
+                </div>
+
+                <div class="rose-gallery-item">
+                    <img src="{{ asset('images/5rose/fruit-salad.jpg') }}" alt="Tropical Fruit Salad Sundae" loading="lazy">
+                    <div class="rose-gallery-overlay">
+                        <span>Sweet Craving</span>
+                        <h4>Fruit Salad Sundae</h4>
+                    </div>
+                </div>
+
+                <div class="rose-gallery-item">
+                    <img src="{{ asset('images/5rose/papaya-juice.jpg') }}" alt="Fresh Papaya Juice" loading="lazy">
+                    <div class="rose-gallery-overlay">
+                        <span>100% Natural</span>
+                        <h4>Fresh Papaya Juice</h4>
+                    </div>
+                </div>
+
+                <div class="rose-gallery-item rose-gallery-wide">
+                    <img src="{{ asset('images/5rose/snacks-desserts-banner.jpg') }}" alt="5Rose Snacks &amp; Desserts Spread" loading="lazy">
+                    <div class="rose-gallery-overlay">
+                        <span>Hot &amp; Savoury</span>
+                        <h4>Snacks, Samosas &amp; Desserts</h4>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="mt-10">
-        <div class="flex items-center justify-between mb-5 px-1">
-            <h2 class="text-xl font-extrabold text-[#173b2c] tracking-tight">Our Gallery 📸</h2>
-        </div>
-        
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            <div class="aspect-square bg-[#f5f8f6] rounded-[18px] flex items-center justify-center text-5xl hover:bg-[#e8f4ec] transition-colors duration-300">🍹</div>
-            <div class="aspect-square bg-[#f5f8f6] rounded-[18px] flex items-center justify-center text-5xl hover:bg-[#e8f4ec] transition-colors duration-300">🥤</div>
-            <div class="aspect-square bg-[#f5f8f6] rounded-[18px] flex items-center justify-center text-5xl hover:bg-[#e8f4ec] transition-colors duration-300">🍍</div>
-            <div class="aspect-square bg-[#f5f8f6] rounded-[18px] flex items-center justify-center text-5xl hover:bg-[#e8f4ec] transition-colors duration-300">🍨</div>
-            <div class="aspect-square bg-[#f5f8f6] rounded-[18px] flex items-center justify-center text-5xl hover:bg-[#e8f4ec] transition-colors duration-300 col-span-2 sm:col-span-1">🥑</div>
-        </div>
-    </section>
+    {{-- =========================
+         CONNECT / FOOTER
+    ========================== --}}
+    <footer id="connect" class="rose-footer">
+        <div class="rose-container">
+            <div class="rose-footer-grid">
+                <div class="rose-footer-brand">
+                    <div class="rose-brand-text">
+                        <strong style="color: white; font-size: 24px;">5Rose Cool Bar</strong>
+                        <span style="color: var(--rose-muted);">GOOD FOOD. BRIGHTER DAYS.</span>
+                    </div>
+                    <p class="rose-footer-tagline">
+                        Your go-to cool spot in Kurunegala for refreshing pure fruit juices, decadent milkshakes, mouthwatering desserts, and hot savoury snacks.
+                    </p>
+                </div>
 
-</main>
-@endsection
+                <div class="rose-footer-info">
+                    <h4>Visit Us</h4>
+                    <p>Kurunegala, Sri Lanka</p>
+                    <p>Open Daily · 9:00 AM – 11:00 PM</p>
+                </div>
+
+                <div class="rose-footer-links">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#discover">Discover Menu</a>
+                    <a href="#reviews">Customer Reviews</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="{{ route('customer.feedback') }}">Rate &amp; Feedback</a>
+                </div>
+
+                <div class="rose-footer-cta">
+                    <h4>Your Thoughts Matter</h4>
+                    <p>Help us serve you better by dropping a quick review.</p>
+                    <a href="{{ route('customer.feedback') }}" class="rose-header-feedback" style="display: inline-flex; width: fit-content;">
+                        Leave Feedback <span>↗</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="rose-footer-bottom">
+                <p>&copy; {{ date('Y') }} 5Rose Cool Bar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</div>

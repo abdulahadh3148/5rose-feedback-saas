@@ -56,9 +56,8 @@ a {
 
 .customer-app {
     width: 100%;
-    max-width: 480px;
     min-height: 100vh;
-    margin: 0 auto;
+    margin: 0;
     background: #ffffff;
 }
 
@@ -463,18 +462,7 @@ textarea.form-control {
 /* RESPONSIVE */
 
 @media (min-width: 768px) {
-
-    .customer-app {
-        margin: 35px auto;
-        min-height: calc(100vh - 70px);
-
-        border: 1px solid #e8eeea;
-        border-radius: 28px;
-        overflow: hidden;
-
-        box-shadow: 0 20px 70px rgba(0,0,0,0.07);
-    }
-
+    /* Desktop layout overrides for other legacy components can go here */
 }
 
 @media (max-width: 360px) {

@@ -9,7 +9,11 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/css/customer.css',
-                'resources/js/app.js'
+                'resources/css/customer-home.css',
+                'resources/css/feedback-premium.css',
+                'resources/js/app.js',
+                'resources/js/customer-home.js',
+                'resources/js/feedback-premium.js',
             ],
             refresh: true,
             fonts: [

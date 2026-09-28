@@ -1,717 +1,538 @@
 @extends('layouts.customer')
 
-@section('title', 'Share Your Experience | 5Rose Cool Bar')
+@section('title', 'Share Your Experience | 5Rose Coolspot')
 
 @section('hideCustomerChrome', '1')
 
+
+@push('styles')
+    @vite('resources/css/feedback-premium.css')
+@endpush
+
+
+@push('scripts')
+    @vite('resources/js/feedback-premium.js')
+@endpush
+
+
 @section('content')
 
-<div class="fb-screen">
+<div class="feedback-experience">
 
-    <!-- COMPACT HEADER -->
+    <div class="feedback-orb feedback-orb-one"></div>
+    <div class="feedback-orb feedback-orb-two"></div>
 
-    <header class="fb-header">
 
-        <a href="{{ route('customer.home') }}"
-           class="fb-back"
-           aria-label="Back to home">
-            ←
+    {{-- TOP BAR --}}
+
+    <header class="feedback-topbar">
+
+        <a
+            href="{{ route('customer.home') }}"
+            class="feedback-back"
+        >
+            <span>←</span>
+            <span>Back to 5Rose</span>
         </a>
 
-        <div class="fb-brand">
 
-            <div class="fb-logo">🌹</div>
+        <div class="feedback-brand">
 
-            <strong>5Rose Cool Bar</strong>
+            <div class="feedback-brand-logo">
+                <img
+                    src="{{ asset('images/5rose/logo.png') }}"
+                    alt="5Rose Coolspot Logo"
+                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px;"
+                    onerror="this.style.display='none'; this.parentElement.textContent='🌹';"
+                >
+            </div>
 
-            <span>📍 Kurunegala</span>
+            <div>
+
+                <strong>
+                    5Rose Coolspot
+                </strong>
+
+                <small>
+                    KURUNEGALA
+                </small>
+
+            </div>
 
         </div>
 
-        <div class="fb-header-space"></div>
+
+        <div
+            class="network-badge"
+            id="networkBadge"
+        >
+
+            <span class="network-dot"></span>
+
+            <span data-network-label>
+                Online
+            </span>
+
+        </div>
 
     </header>
 
 
-    <main class="fb-main">
 
-        <!-- FORM VIEW -->
+    <main class="feedback-shell">
 
-        <section id="formView">
 
-            <div class="feedback-heading">
+        {{-- LEFT STORY --}}
 
-                <h1>Share your experience</h1>
+        <section
+            class="feedback-story feedback-reveal"
+        >
 
-                <p>It only takes a few seconds.</p>
+            <span class="feedback-kicker">
 
-            </div>
+                <span class="feedback-kicker-dot"></span>
 
-            <form id="feedbackForm" novalidate>
+                YOUR EXPERIENCE MATTERS
 
-                <!-- RATING CARD -->
+            </span>
 
-                <div class="feedback-card fb-rating-card">
 
-                    <label class="field-label"
-                           id="ratingLabel">
+            <h1>
+                <span>HELP US MAKE</span>
+                <span>EVERY VISIT</span>
+                <em>BETTER.</em>
+            </h1>
 
-                        How was your experience today?
 
-                    </label>
+            <p>
+                Loved something? Tell us.
+                Something didn't feel right? Tell us that too.
+                Honest feedback helps us create a better
+                5Rose experience for every customer.
+            </p>
 
-                    <div class="fb-stars"
-                         role="group"
-                         aria-labelledby="ratingLabel">
 
-                        <button type="button"
-                                class="fb-star"
-                                data-value="1"
-                                aria-label="1 star"
-                                aria-pressed="false">★</button>
+            <div class="feedback-values">
 
-                        <button type="button"
-                                class="fb-star"
-                                data-value="2"
-                                aria-label="2 stars"
-                                aria-pressed="false">★</button>
+                <div class="feedback-value">
 
-                        <button type="button"
-                                class="fb-star"
-                                data-value="3"
-                                aria-label="3 stars"
-                                aria-pressed="false">★</button>
+                    <span class="feedback-value-icon">
+                        ✦
+                    </span>
 
-                        <button type="button"
-                                class="fb-star"
-                                data-value="4"
-                                aria-label="4 stars"
-                                aria-pressed="false">★</button>
-
-                        <button type="button"
-                                class="fb-star"
-                                data-value="5"
-                                aria-label="5 stars"
-                                aria-pressed="false">★</button>
-
-                    </div>
-
-                    <input type="hidden"
-                           name="rating"
-                           id="rating"
-                           value="">
-
-                    <p id="ratingText"
-                       class="rating-description"
-                       aria-live="polite">
-
-                        Select your rating
-
-                    </p>
-
-                    <p id="ratingError"
-                       class="fb-error"
-                       role="alert"></p>
+                    <span>
+                        Good and bad feedback are both welcome
+                    </span>
 
                 </div>
 
 
-                <!-- FEEDBACK DETAILS CARD -->
+                <div class="feedback-value">
 
-                <div class="feedback-card">
+                    <span class="feedback-value-icon">
+                        ⚡
+                    </span>
 
-                    <div class="form-field">
-
-                        <label for="product"
-                               class="field-label">
-
-                            What did you order?
-
-                        </label>
-
-                        <select id="product"
-                                name="product"
-                                class="form-control">
-
-                            <option value="">
-                                Select an item (optional)
-                            </option>
-
-                            <option value="Avocado Milkshake">
-                                Avocado Milkshake
-                            </option>
-
-                            <option value="Falooda">
-                                Falooda
-                            </option>
-
-                            <option value="Durian Juice">
-                                Durian Juice
-                            </option>
-
-                            <option value="Fruit Salad">
-                                Fruit Salad
-                            </option>
-
-                            <option value="Submarine Bun">
-                                Submarine Bun
-                            </option>
-
-                            <option value="Masala Tea">
-                                Masala Tea
-                            </option>
-
-                            <option value="Other">
-                                Other
-                            </option>
-
-                        </select>
-
-                    </div>
-
-
-                    <!-- COMMENT -->
-
-                    <div class="form-field">
-
-                        <label for="comment"
-                               class="field-label">
-
-                            Your feedback
-
-                        </label>
-
-                        <textarea id="comment"
-                                  name="comment"
-                                  class="form-control"
-                                  rows="4"
-                                  minlength="5"
-                                  maxlength="300"
-                                  placeholder="What did you like or what could we improve?"
-                                  aria-describedby="commentError"
-                                  required></textarea>
-
-                        <div class="character-count">
-
-                            <span id="charCount">0</span>/300
-
-                        </div>
-
-                        <p id="commentError"
-                           class="fb-error"
-                           role="alert"></p>
-
-                    </div>
-
-
-                    <!-- CUSTOMER NAME -->
-
-                    <div class="form-field">
-
-                        <label for="customerName"
-                               class="field-label">
-
-                            Your name (optional)
-
-                        </label>
-
-                        <input type="text"
-                               id="customerName"
-                               name="customer_name"
-                               class="form-control"
-                               maxlength="80"
-                               placeholder="Enter your name">
-
-                        <p class="fb-help">
-
-                            Leave blank to submit anonymously.
-
-                        </p>
-
-                    </div>
-
-
-                    <!-- SUBMIT BUTTON -->
-
-                    <button type="submit"
-                            id="submitButton"
-                            class="primary-button">
-
-                        <span id="buttonText">
-                            ➤ &nbsp; Submit Feedback
-                        </span>
-
-                        <span id="buttonLoading"
-                              class="fb-loading"
-                              hidden>
-
-                            <span class="fb-spinner"></span>
-
-                            Submitting...
-
-                        </span>
-
-                    </button>
+                    <span>
+                        Takes less than a minute
+                    </span>
 
                 </div>
 
-            </form>
 
+                <div class="feedback-value">
 
-            <!-- BOTTOM MESSAGE -->
+                    <span class="feedback-value-icon">
+                        ♡
+                    </span>
 
-            <div class="fb-bottom-note">
+                    <span>
+                        Your feedback is reviewed with care
+                    </span>
 
-                <span>🛡️</span>
-
-                <p>
-                    Your feedback helps us serve you better!
-                </p>
+                </div>
 
             </div>
+
+
+            <p class="feedback-quote">
+
+                “Better experiences begin by listening.”
+
+                <br>
+
+                — 5Rose Coolspot
+
+            </p>
 
         </section>
 
 
-        <!-- SUCCESS VIEW -->
 
-        <section id="successView"
-                 class="success-card"
-                 hidden>
+        {{-- FORM CARD --}}
 
-            <div class="success-icon">✓</div>
+        <section
+            class="feedback-panel
+                   feedback-reveal
+                   feedback-delay-1"
+        >
 
-            <h2>
-                Thank you for helping us improve!
-            </h2>
 
-            <p>
-                This is a UI preview.
-                Your feedback has not been saved yet.
-            </p>
+            {{-- FORM VIEW --}}
 
-            <a href="{{ route('customer.home') }}"
-               class="primary-button">
+            <div
+                id="feedbackFormView"
+                class="feedback-form-view"
+            >
 
-                Back to Home →
+                <div class="feedback-panel-top">
 
-            </a>
+                    <div class="feedback-step">
+
+                        <span>
+                            SHARE YOUR EXPERIENCE
+                        </span>
+
+                        <small>
+                            ~ 30 seconds
+                        </small>
+
+                    </div>
+
+
+                    <h2>
+                        How was your visit?
+                    </h2>
+
+
+                    <p class="feedback-panel-subtitle">
+
+                        A few words from you can make
+                        the next visit even better.
+
+                    </p>
+
+                </div>
+
+
+
+                <form
+                    id="feedbackForm"
+                    action="{{ route('customer.feedback.store') }}"
+                    method="POST"
+                    novalidate
+                >
+
+                    @csrf
+
+
+                    {{-- RATING --}}
+
+                    <div class="rating-area">
+
+                        <label
+                            class="rating-title"
+                            id="ratingTitle"
+                        >
+                            Rate your overall experience
+                        </label>
+
+
+                        <p class="rating-subtitle">
+                            Tap the stars below
+                        </p>
+
+
+                        <div
+                            class="premium-stars"
+                            role="group"
+                            aria-labelledby="ratingTitle"
+                        >
+
+                            @for ($rating = 1; $rating <= 5; $rating++)
+
+                                <button
+                                    type="button"
+                                    class="premium-star"
+                                    data-value="{{ $rating }}"
+                                    aria-label="{{ $rating }} star rating"
+                                    aria-pressed="false"
+                                >
+                                    ★
+                                </button>
+
+                            @endfor
+
+                        </div>
+
+
+                        <input
+                            type="hidden"
+                            name="rating"
+                            id="rating"
+                            value=""
+                        >
+
+
+                        <p
+                            id="ratingResult"
+                            class="rating-result"
+                        >
+                            Choose your rating
+                        </p>
+
+
+                        <p
+                            id="ratingError"
+                            class="feedback-error"
+                            role="alert"
+                        ></p>
+
+                    </div>
+
+
+
+                    <div class="feedback-fields">
+
+
+                        {{-- PRODUCT --}}
+
+                        <div class="feedback-field">
+
+                            <label for="product">
+                                What did you order?
+                                <span>Optional</span>
+                            </label>
+
+
+                            <select
+                                id="product"
+                                name="product"
+                                class="feedback-input"
+                            >
+
+                                <option value="">
+                                    Select an item
+                                </option>
+
+                                <option value="Avocado Milkshake">
+                                    Avocado Milkshake
+                                </option>
+
+                                <option value="Falooda">
+                                    Falooda
+                                </option>
+
+                                <option value="Durian Juice">
+                                    Durian Juice
+                                </option>
+
+                                <option value="Badham">
+                                    Badham
+                                </option>
+
+                                <option value="Molisha">
+                                    Molisha
+                                </option>
+
+                                <option value="Fruit Salad">
+                                    Fruit Salad
+                                </option>
+
+                                <option value="Submarine Bun">
+                                    Submarine Bun
+                                </option>
+
+                                <option value="Chicken Samosa">
+                                    Chicken Samosa
+                                </option>
+
+                                <option value="Masala Tea">
+                                    Masala Tea
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        {{-- COMMENT --}}
+
+                        <div class="feedback-field">
+
+                            <label for="comment">
+                                Tell us about your experience
+                            </label>
+
+
+                            <textarea
+                                id="comment"
+                                name="comment"
+                                class="feedback-input"
+                                maxlength="300"
+                                minlength="5"
+                                required
+                                placeholder="What did you enjoy? What should we improve?"
+                            ></textarea>
+
+
+                            <div class="feedback-character-row">
+
+                                <span>
+                                    Honest feedback is always welcome.
+                                </span>
+
+                                <span>
+                                    <span id="charCount">0</span>/300
+                                </span>
+
+                            </div>
+
+
+                            <p
+                                id="commentError"
+                                class="feedback-error"
+                                role="alert"
+                            ></p>
+
+                        </div>
+
+
+
+                        {{-- NAME --}}
+
+                        <div class="feedback-field">
+
+                            <label for="customerName">
+
+                                Your name
+
+                                <span>
+                                    Optional
+                                </span>
+
+                            </label>
+
+
+                            <input
+                                id="customerName"
+                                name="customer_name"
+                                type="text"
+                                maxlength="80"
+                                autocomplete="name"
+                                class="feedback-input"
+                                placeholder="Enter your name or leave anonymous"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="feedback-privacy">
+
+                        <span class="feedback-privacy-icon">
+                            🛡
+                        </span>
+
+                        <span>
+
+                            Your feedback is sent directly
+                            to 5Rose.
+
+                            Only feedback approved by our team
+                            may appear publicly.
+
+                        </span>
+
+                    </div>
+
+
+
+                    <button
+                        type="submit"
+                        class="feedback-submit"
+                        id="feedbackSubmit"
+                    >
+
+                        <span id="submitText">
+                            Send My Feedback
+                        </span>
+
+                        <span
+                            class="feedback-submit-arrow"
+                            id="submitStatus"
+                        >
+                            ↗
+                        </span>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+
+
+            {{-- SUCCESS --}}
+
+            <div
+                class="feedback-success"
+                id="feedbackSuccess"
+                hidden
+            >
+
+                <div class="feedback-success-inner">
+
+                    <div class="success-ring">
+
+                        <span class="success-check">
+                            ✓
+                        </span>
+
+                        <span class="success-particle p1"></span>
+                        <span class="success-particle p2"></span>
+                        <span class="success-particle p3"></span>
+                        <span class="success-particle p4"></span>
+
+                    </div>
+
+
+                    <h2>
+                        Thank you for helping
+                        us improve.
+                    </h2>
+
+
+                    <p>
+                        Your feedback has been received successfully.
+
+                        We truly appreciate you taking a moment
+                        to help us create a better 5Rose experience.
+                    </p>
+
+
+                    <a
+                        href="{{ route('customer.home') }}"
+                        class="success-back"
+                    >
+                        Back to 5Rose →
+                    </a>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
 
 </div>
-
-
-<!-- PAGE-SPECIFIC STYLING -->
-
-<style>
-
-.fb-screen {
-    max-width: 480px;
-    min-height: 100vh;
-    margin: 0 auto;
-    background: #fff;
-}
-
-.fb-header {
-    min-height: 90px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 18px;
-    background: #fff;
-}
-
-.fb-back {
-    font-size: 25px;
-    font-weight: 600;
-    color: #173b2c;
-}
-
-.fb-brand {
-    text-align: center;
-}
-
-.fb-logo {
-    font-size: 26px;
-}
-
-.fb-brand strong {
-    display: block;
-    font-size: 15px;
-    color: #075b3a;
-}
-
-.fb-brand span {
-    display: block;
-    margin-top: 3px;
-    font-size: 10px;
-    color: #708477;
-}
-
-.fb-header-space {
-    width: 20px;
-}
-
-.fb-main {
-    padding: 12px 18px 40px;
-}
-
-.fb-rating-card {
-    text-align: center;
-}
-
-.fb-stars {
-    display: flex;
-    justify-content: center;
-    gap: 2px;
-    margin-top: 15px;
-}
-
-.fb-star {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    width: 46px;
-    height: 50px;
-
-    padding: 0;
-    border: none;
-
-    background: transparent;
-    color: #d5d8d6;
-
-    font-size: 42px;
-    line-height: 1;
-
-    transition:
-        color 0.2s ease,
-        transform 0.2s ease;
-}
-
-.fb-star.selected {
-    color: #ffb400;
-}
-
-.fb-star:active {
-    transform: scale(1.15);
-}
-
-.fb-star:focus-visible {
-    outline: 2px solid #075b3a;
-    outline-offset: 2px;
-    border-radius: 8px;
-}
-
-.fb-error {
-    margin-top: 8px;
-    color: #e5484d;
-    font-size: 12px;
-}
-
-.fb-error:empty {
-    display: none;
-}
-
-.fb-help {
-    margin-top: 8px;
-    font-size: 11px;
-    color: #77857c;
-}
-
-.fb-bottom-note {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-
-    margin-top: 15px;
-    padding: 20px;
-
-    border-radius: 16px;
-    background: #f0f8f3;
-
-    color: #075b3a;
-    font-size: 12px;
-}
-
-.fb-bottom-note span {
-    font-size: 23px;
-}
-
-.fb-loading {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.fb-loading[hidden],
-#successView[hidden],
-#formView[hidden] {
-    display: none !important;
-}
-
-.fb-spinner {
-    width: 18px;
-    height: 18px;
-
-    border: 2px solid rgba(255,255,255,0.4);
-    border-top-color: #fff;
-    border-radius: 50%;
-
-    animation: fb-spin 0.7s linear infinite;
-}
-
-@keyframes fb-spin {
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-.success-card {
-    margin-top: 30px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.04);
-}
-
-@media (min-width: 768px) {
-    .fb-screen {
-        margin: 30px auto;
-        border: 1px solid #e8eeea;
-        border-radius: 25px;
-        box-shadow: 0 15px 50px rgba(0,0,0,0.05);
-        overflow: hidden;
-    }
-}
-
-@media (max-width: 360px) {
-    .fb-main {
-        padding: 12px 12px 35px;
-    }
-
-    .fb-star {
-        width: 42px;
-        font-size: 37px;
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .fb-star {
-        transition: none;
-    }
-
-    .fb-spinner {
-        animation: none;
-    }
-}
-
-</style>
-
-
-<!-- INTERACTIVE UI LOGIC -->
-
-<script>
-
-document.addEventListener('DOMContentLoaded', function () {
-
-    const stars = document.querySelectorAll('.fb-star');
-
-    const ratingInput =
-        document.getElementById('rating');
-
-    const ratingText =
-        document.getElementById('ratingText');
-
-    const ratingError =
-        document.getElementById('ratingError');
-
-    const comment =
-        document.getElementById('comment');
-
-    const commentError =
-        document.getElementById('commentError');
-
-    const charCount =
-        document.getElementById('charCount');
-
-    const form =
-        document.getElementById('feedbackForm');
-
-    const formView =
-        document.getElementById('formView');
-
-    const successView =
-        document.getElementById('successView');
-
-    const submitButton =
-        document.getElementById('submitButton');
-
-    const buttonText =
-        document.getElementById('buttonText');
-
-    const buttonLoading =
-        document.getElementById('buttonLoading');
-
-
-    const ratingLabels = {
-        1: 'Poor',
-        2: 'Fair',
-        3: 'Good',
-        4: 'Very Good',
-        5: 'Excellent'
-    };
-
-
-    // STAR RATING
-
-    stars.forEach(function (star) {
-
-        star.addEventListener('click', function () {
-
-            const value = Number(star.dataset.value);
-
-            ratingInput.value = value;
-
-            stars.forEach(function (item) {
-
-                const itemValue =
-                    Number(item.dataset.value);
-
-                item.classList.toggle(
-                    'selected',
-                    itemValue <= value
-                );
-
-                item.setAttribute(
-                    'aria-pressed',
-                    String(itemValue === value)
-                );
-
-            });
-
-            ratingText.textContent =
-                ratingLabels[value];
-
-            ratingError.textContent = '';
-
-        });
-
-    });
-
-
-    // CHARACTER COUNTER
-
-    comment.addEventListener('input', function () {
-
-        charCount.textContent = comment.value.length;
-
-        commentError.textContent = '';
-
-        comment.removeAttribute('aria-invalid');
-
-    });
-
-
-    // FORM VALIDATION AND UI PREVIEW
-
-    form.addEventListener('submit', function (event) {
-
-        event.preventDefault();
-
-        const rating = Number(ratingInput.value);
-
-        const feedback = comment.value.trim();
-
-        let isValid = true;
-
-
-        if (rating < 1 || rating > 5) {
-
-            ratingError.textContent =
-                'Please select a rating.';
-
-            isValid = false;
-
-        } else {
-
-            ratingError.textContent = '';
-
-        }
-
-
-        if (feedback.length < 5) {
-
-            commentError.textContent =
-                'Please enter at least 5 characters.';
-
-            comment.setAttribute('aria-invalid', 'true');
-
-            isValid = false;
-
-        } else {
-
-            commentError.textContent = '';
-
-            comment.removeAttribute('aria-invalid');
-
-        }
-
-
-        if (!isValid) {
-
-            if (rating < 1 || rating > 5) {
-                stars[0].focus();
-            } else {
-                comment.focus();
-            }
-
-            return;
-
-        }
-
-
-        // Send feedback to Laravel
-        submitButton.disabled = true;
-        buttonText.hidden = true;
-        buttonLoading.hidden = false;
-
-        const formData = new FormData(form);
-
-        fetch("{{ route('customer.feedback.store') }}", {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        })
-        .then(response => {
-            if (!response.ok) throw new Error('Validation failed or server error');
-            return response.json();
-        })
-        .then(data => {
-            // Update success message text to be genuine
-            const successText = document.querySelector('#successView p');
-            successText.textContent = "Your feedback has been saved. We truly appreciate your input!";
-
-            formView.hidden = true;
-            successView.hidden = false;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        })
-        .catch(error => {
-            console.error(error);
-            alert("Something went wrong saving your feedback. Please try again.");
-            submitButton.disabled = false;
-            buttonText.hidden = false;
-            buttonLoading.hidden = true;
-        });
-
-    });
-
-});
-
-</script>
 
 @endsection

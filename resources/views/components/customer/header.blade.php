@@ -1,7 +1,14 @@
 <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-[#e8eeea] px-5 py-4 transition-all duration-300 shadow-sm">
     <div class="flex items-center justify-between max-w-[480px] mx-auto">
         <div class="flex items-center gap-3">
-            <div class="text-3xl">🌹</div>
+            <div class="w-10 h-10 rounded-xl overflow-hidden flex-shrink-0 bg-white/10 border border-white/20 p-0.5">
+                <img
+                    src="{{ asset('images/5rose/logo.png') }}"
+                    alt="5Rose Coolspot Logo"
+                    class="w-full h-full object-contain rounded-lg"
+                    onerror="this.style.display='none'; this.parentElement.textContent='🌹';"
+                >
+            </div>
             <div>
                 <h1 class="text-[17px] font-extrabold text-[#075b3a] tracking-tight leading-tight">5Rose Cool Bar</h1>
                 <p class="text-[11px] text-[#77857c] font-medium mt-0.5">📍 Kurunegala, Sri Lanka</p>
