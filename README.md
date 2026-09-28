@@ -1,58 +1,60 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 5Rose Coolspot Feedback
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A mobile-friendly feedback collection site for 5Rose Cool Bar in Kurunegala. Customers can choose a rating, optionally select an ordered item and name, add a comment, and submit feedback for storage.
 
-## About Laravel
+## Implemented
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Customer home page with menu highlights, gallery area, and feedback entry point.
+- Five-star feedback form with validation, character count, loading state, and success state.
+- Laravel endpoint validates and saves feedback to the database.
+- Optional customer name supports anonymous submissions.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Planned
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- Admin login and moderation queue to approve or reject submissions.
+- Public display of approved reviews only.
+- Real shop gallery images and production deployment.
 
-## Learning Laravel
+The current home page intentionally shows an empty reviews state. Do not describe moderation or published reviews as implemented yet.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Tech stack
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.3 or newer and Laravel 13
+- Blade templates, Tailwind CSS 4, and Vite
+- SQLite by default for local development and tests
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+The repository description currently mentions MySQL, but `.env.example` and the test configuration default to SQLite. Update the database configuration and test it before claiming MySQL support.
 
-## Agentic Development
+## Run locally
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+Requirements: PHP 8.3+, Composer, Node.js, and npm.
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone https://github.com/abdulahadh3148/5rose-feedback-saas.git
+cd 5rose-feedback-saas
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+npm install
+npm run build
+php artisan serve
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Open the local URL printed by Artisan. For frontend development, run `npm run dev` in a second terminal.
 
-## Contributing
+## Tests
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```bash
+php artisan test
+```
 
-## Code of Conduct
+Feature tests cover valid feedback storage and validation failures using an in-memory SQLite database.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Screenshots and demo
 
-## Security Vulnerabilities
+No live demo is configured in GitHub yet. Add privacy-safe screenshots under `docs/screenshots/` after deploying and checking the customer home, feedback form, successful submission, and moderation queue.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Security and privacy
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Customer names are optional. Before accepting real customer submissions, add moderation and a retention policy, protect admin routes, and configure production database, HTTPS, backups, and application secrets through the host's environment settings.
