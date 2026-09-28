@@ -5,9 +5,10 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\FeedbackModerationController;
 
-Route::get('/', function () {
-    return view('customer.home');
-})->name('customer.home');
+Route::get(
+    '/',
+    [HomeController::class, 'index']
+)->name('customer.home');
 
 Route::get('/feedback', function () {
     return view('customer.feedback');

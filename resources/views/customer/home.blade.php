@@ -241,13 +241,53 @@
                     data-delay="340"
                 >
 
-                    <span class="rose-trust-icon">
-                        ✦
-                    </span>
+                    @if ($reviewCount > 0)
 
-                    <span>
-                        Fresh drinks · Great taste · Happy people
-                    </span>
+                        <div class="flex items-center gap-3">
+
+                            <strong
+                                class="text-4xl font-black
+                                       text-white"
+                            >
+                                {{ number_format($averageRating, 1) }}
+                            </strong>
+
+                            <div>
+
+                                <div
+                                    class="tracking-[2px]
+                                           text-[#ffb400]"
+                                >
+                                    @for ($i = 1; $i <= 5; $i++)
+
+                                        <span>
+                                            {{ $i <= round($averageRating) ? '★' : '☆' }}
+                                        </span>
+
+                                    @endfor
+                                </div>
+
+                                <p
+                                    class="mt-1 text-xs
+                                           text-white/60"
+                                >
+                                    Based on
+                                    {{ $reviewCount }}
+                                    approved
+                                    {{ Str::plural('review', $reviewCount) }}
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    @else
+
+                        <p class="text-sm text-white/60">
+                            Be the first customer to share your experience.
+                        </p>
+
+                    @endif
 
                 </div>
 
@@ -471,62 +511,292 @@
     {{-- =========================
          CUSTOMER REVIEWS
     ========================== --}}
-    <section id="reviews" class="rose-reviews">
+    <section id="reviews" class="rose-reviews mt-12">
         <div class="rose-container">
-            <div class="rose-section-head text-center">
-                <span class="rose-section-badge">★ TESTIMONIALS</span>
-                <h2 class="rose-section-title">Loved by <em>Kurunegala</em></h2>
-                <p class="rose-section-subtitle">Real experiences shared by our valued customers who visit us for their daily refreshment.</p>
+
+            <div
+                class="mb-6 flex items-end
+                       justify-between gap-4"
+            >
+
+                <div>
+
+                    <span
+                        class="text-[10px]
+                               font-extrabold
+                               tracking-[.18em]
+                               text-[#0b8152]"
+                    >
+                        CUSTOMER EXPERIENCES
+                    </span>
+
+                    <h2
+                        class="mt-2 text-2xl
+                               font-black
+                               tracking-[-.04em]
+                               text-[#173b2c]"
+                    >
+                        What customers are saying
+                    </h2>
+
+                </div>
+
+
+                @if ($reviewCount > 0)
+
+                    <div class="text-right">
+
+                        <strong
+                            class="block text-2xl
+                                   font-black
+                                   text-[#173b2c]"
+                        >
+                            {{ number_format($averageRating, 1) }}
+                        </strong>
+
+                        <span
+                            class="text-xs text-[#ffb400]"
+                        >
+                            ★★★★★
+                        </span>
+
+                    </div>
+
+                @endif
+
             </div>
 
-            <div class="rose-reviews-grid">
-                <div class="rose-review-card">
-                    <div class="rose-review-stars">★★★★★</div>
-                    <p class="rose-review-text">“The Royal Rose Falooda here is hands down the best in the area! The layers of ice cream, basil seeds and jelly are perfectly balanced.”</p>
-                    <div class="rose-review-author">
-                        <div class="rose-avatar">AF</div>
-                        <div>
-                            <strong>Ahamed Farhan</strong>
-                            <span>Regular Visitor</span>
-                        </div>
-                    </div>
+
+
+            @if ($approvedReviews->isNotEmpty())
+
+                <div
+                    class="grid gap-4
+                           md:grid-cols-2"
+                >
+
+                    @foreach ($approvedReviews as $review)
+
+                        <article
+                            class="group rounded-[22px]
+                                   border border-[#e6ece7]
+                                   bg-white p-5
+                                   shadow-[0_6px_25px_rgba(7,91,58,.04)]
+                                   transition duration-300
+                                   hover:-translate-y-1
+                                   hover:shadow-[0_15px_35px_rgba(7,91,58,.09)]"
+                        >
+
+                            <div
+                                class="flex items-start
+                                       justify-between gap-4"
+                            >
+
+                                <div
+                                    class="flex items-center gap-3"
+                                >
+
+                                    <div
+                                        class="grid h-10 w-10
+                                               place-items-center
+                                               rounded-full
+                                               bg-[#e6f1e9]
+                                               text-xs font-black
+                                               text-[#08784b]"
+                                    >
+                                        {{ strtoupper(
+                                            substr(
+                                                $review->customer_name
+                                                ?: 'A',
+                                                0,
+                                                1
+                                            )
+                                        ) }}
+                                    </div>
+
+
+                                    <div>
+
+                                        <strong
+                                            class="block text-sm
+                                                   text-[#173b2c]"
+                                        >
+                                            {{ $review->customer_name
+                                                ?: 'Anonymous Customer'
+                                            }}
+                                        </strong>
+
+                                        <span
+                                            class="mt-1 block
+                                                   text-[10px]
+                                                   text-gray-400"
+                                        >
+                                            {{ $review->approved_at
+                                                ?->diffForHumans()
+                                                ?? $review->created_at->diffForHumans()
+                                            }}
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                @if ($review->product)
+
+                                    <span
+                                        class="rounded-full
+                                               bg-[#edf6f0]
+                                               px-3 py-1
+                                               text-[9px]
+                                               font-extrabold
+                                               text-[#08784b]"
+                                    >
+                                        {{ $review->product }}
+                                    </span>
+
+                                @endif
+
+                            </div>
+
+
+                            <div
+                                class="mt-4 tracking-[2px]"
+                                aria-label="{{ $review->rating }} out of 5 stars"
+                            >
+
+                                @for ($i = 1; $i <= 5; $i++)
+
+                                    <span
+                                        class="{{ $i <= $review->rating
+                                            ? 'text-[#ffb400]'
+                                            : 'text-gray-200'
+                                        }}"
+                                    >
+                                        ★
+                                    </span>
+
+                                @endfor
+
+                            </div>
+
+
+                            <p
+                                class="mt-4 text-sm
+                                       leading-7
+                                       text-[#53645a]"
+                            >
+                                “{{ $review->comment }}”
+                            </p>
+
+                        </article>
+
+                    @endforeach
+
                 </div>
 
-                <div class="rose-review-card">
-                    <div class="rose-review-stars">★★★★★</div>
-                    <p class="rose-review-text">“Fresh Papaya juice and hot crispy egg rolls are my daily evening stop after work. Always clean, fast, and welcoming staff.”</p>
-                    <div class="rose-review-author">
-                        <div class="rose-avatar">NP</div>
-                        <div>
-                            <strong>Nadeesha Perera</strong>
-                            <span>Local Foodie</span>
-                        </div>
+
+                <div
+                    class="mt-5 flex flex-wrap
+                           items-center
+                           justify-between
+                           gap-4 rounded-[18px]
+                           bg-[#edf6f0]
+                           px-5 py-4"
+                >
+
+                    <div>
+
+                        <strong
+                            class="block text-sm
+                                   text-[#173b2c]"
+                        >
+                            {{ $reviewCount }}
+                            approved
+                            {{ Str::plural('review', $reviewCount) }}
+                        </strong>
+
+                        <span
+                            class="text-[11px]
+                                   text-[#718078]"
+                        >
+                            Based on verified customer feedback.
+                        </span>
+
                     </div>
+
+
+                    <a
+                        href="{{ route('customer.feedback') }}"
+                        class="rounded-full
+                               bg-[#08784b]
+                               px-5 py-3
+                               text-xs font-extrabold
+                               text-white
+                               transition
+                               hover:bg-[#06643e]"
+                    >
+                        Share Your Experience →
+                    </a>
+
                 </div>
 
-                <div class="rose-review-card">
-                    <div class="rose-review-stars">★★★★★</div>
-                    <p class="rose-review-text">“The Fruit Salad with Ice Cream is loaded with fresh, crisp fruit cubes and heavenly honey syrup. My kids absolutely love it!”</p>
-                    <div class="rose-review-author">
-                        <div class="rose-avatar">KS</div>
-                        <div>
-                            <strong>Kavinda Silva</strong>
-                            <span>Family Diners</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @else
 
-            <div class="rose-feedback-prompt">
-                <div class="rose-feedback-prompt-content">
-                    <h3>Have you visited 5Rose Cool Bar recently?</h3>
-                    <p>We cherish your feedback and use it to craft even better experiences for you.</p>
+                <div
+                    class="rounded-[24px]
+                           border border-dashed
+                           border-[#d8e3db]
+                           bg-white
+                           px-6 py-12
+                           text-center"
+                >
+
+                    <div
+                        class="mx-auto grid
+                               h-14 w-14
+                               place-items-center
+                               rounded-full
+                               bg-[#edf6f0]
+                               text-2xl"
+                    >
+                        ✦
+                    </div>
+
+                    <h3
+                        class="mt-4 text-lg
+                               font-black
+                               text-[#173b2c]"
+                    >
+                        Be the first to share your experience.
+                    </h3>
+
+                    <p
+                        class="mx-auto mt-2
+                               max-w-sm
+                               text-sm leading-6
+                               text-gray-500"
+                    >
+                        Your honest feedback helps us
+                        improve every visit.
+                    </p>
+
+                    <a
+                        href="{{ route('customer.feedback') }}"
+                        class="mt-5 inline-flex
+                               rounded-full
+                               bg-[#08784b]
+                               px-6 py-3
+                               text-xs font-extrabold
+                               text-white"
+                    >
+                        Write a Review →
+                    </a>
+
                 </div>
-                <a href="{{ route('customer.feedback') }}" class="rose-main-button">
-                    <span>Share Your Review</span>
-                    <span class="rose-button-arrow">↗</span>
-                </a>
-            </div>
+
+            @endif
+
         </div>
     </section>
 
