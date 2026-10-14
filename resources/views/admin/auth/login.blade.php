@@ -70,14 +70,17 @@
                     <div class="flex items-center gap-3">
 
                         <div
-                            class="grid h-12 w-12
-                                   place-items-center
+                            class="h-12 w-12 overflow-hidden
                                    rounded-2xl
-                                   border border-white/10
-                                   bg-white/10
-                                   text-2xl"
+                                   border border-white/20
+                                   bg-white/10 p-1 flex items-center justify-center shadow-inner"
                         >
-                            🌹
+                            <img
+                                src="{{ asset('images/5rose/logo.png') }}"
+                                alt="5Rose Logo"
+                                class="h-full w-full object-contain rounded-xl"
+                                onerror="this.style.display='none'; this.parentElement.textContent='🌹';"
+                            >
                         </div>
 
                         <div>
@@ -168,13 +171,16 @@
                         >
 
                             <span
-                                class="grid h-11 w-11
-                                       place-items-center
+                                class="h-11 w-11 overflow-hidden
                                        rounded-2xl
-                                       bg-[#075b3a]
-                                       text-xl"
+                                       bg-white border border-[#075b3a]/20 p-1 flex items-center justify-center shadow-sm"
                             >
-                                🌹
+                                <img
+                                    src="{{ asset('images/5rose/logo.png') }}"
+                                    alt="5Rose Logo"
+                                    class="h-full w-full object-contain rounded-xl"
+                                    onerror="this.style.display='none'; this.parentElement.textContent='🌹';"
+                                >
                             </span>
 
                             <strong

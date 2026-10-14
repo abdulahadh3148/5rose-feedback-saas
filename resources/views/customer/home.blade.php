@@ -862,9 +862,17 @@
         <div class="rose-container">
             <div class="rose-footer-grid">
                 <div class="rose-footer-brand">
-                    <div class="rose-brand-text">
-                        <strong style="color: white; font-size: 24px;">5Rose Cool Bar</strong>
-                        <span style="color: var(--rose-muted);">GOOD FOOD. BRIGHTER DAYS.</span>
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                        <img
+                            src="{{ asset('images/5rose/logo.png') }}"
+                            alt="5Rose Logo"
+                            style="width: 44px; height: 44px; object-fit: contain; border-radius: 12px; background: rgba(255,255,255,0.08); padding: 4px; border: 1px solid rgba(255,255,255,0.15);"
+                            onerror="this.style.display='none';"
+                        >
+                        <div class="rose-brand-text">
+                            <strong style="color: white; font-size: 24px;">5Rose Cool Bar</strong>
+                            <span style="color: var(--rose-muted);">GOOD FOOD. BRIGHTER DAYS.</span>
+                        </div>
                     </div>
                     <p class="rose-footer-tagline">
                         Your go-to cool spot in Kurunegala for refreshing pure fruit juices, decadent milkshakes, mouthwatering desserts, and hot savoury snacks.
@@ -884,6 +892,7 @@
                     <a href="#reviews">Customer Reviews</a>
                     <a href="#gallery">Gallery</a>
                     <a href="{{ route('customer.feedback') }}">Rate &amp; Feedback</a>
+                    <a href="{{ route('admin.login') }}">Staff / Admin Login</a>
                 </div>
 
                 <div class="rose-footer-cta">
@@ -895,8 +904,11 @@
                 </div>
             </div>
 
-            <div class="rose-footer-bottom">
+            <div class="rose-footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <p>&copy; {{ date('Y') }} 5Rose Cool Bar. All rights reserved.</p>
+                <a href="{{ route('admin.login') }}" style="color: var(--rose-muted); font-size: 13px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; border-radius: 999px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); transition: all 0.2s;" onmouseover="this.style.color='#fff'; this.style.borderColor='rgba(255,255,255,0.25)'" onmouseout="this.style.color='var(--rose-muted)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+                    🔒 Admin Login
+                </a>
             </div>
         </div>
     </footer>

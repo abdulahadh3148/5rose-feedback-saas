@@ -439,6 +439,7 @@ body.customer-app {
         0 35px 100px
         rgba(0,0,0,.28);
 
+    -webkit-backdrop-filter: blur(20px);
     backdrop-filter: blur(20px);
 }
 

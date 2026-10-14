@@ -1,9 +1,15 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Admin\AuthController as AdminAuthController;
 use App\Http\Controllers\Admin\FeedbackModerationController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\PosController;
+use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get(
     '/',
@@ -41,11 +47,7 @@ Route::middleware([
   ->name('admin.')
   ->group(function () {
 
-    Route::get('/', function () {
-
-        return view('admin.dashboard');
-
-    })->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
 
     Route::post(
@@ -78,5 +80,13 @@ Route::middleware([
         '/feedback/{feedback}/pending',
         [FeedbackModerationController::class, 'moveToPending']
     )->name('feedback.pending');
+
+    Route::resource('categories', CategoryController::class)->except(['show']);
+    Route::resource('products', ProductController::class)->except(['show']);
+    Route::resource('orders', OrderController::class)->only(['index', 'show', 'update']);
+
+    Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
+    Route::post('/pos/checkout', [PosController::class, 'store'])->name('pos.store');
+    Route::get('/pos/receipt/{order}', [PosController::class, 'receipt'])->name('pos.receipt');
 
 });

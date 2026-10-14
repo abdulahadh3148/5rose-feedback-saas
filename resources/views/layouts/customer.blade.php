@@ -45,6 +45,7 @@
         @include('components.customer.footer')
     @endif
 
+    @include('components.customer.floating-whatsapp')
 
     @stack('scripts')
 

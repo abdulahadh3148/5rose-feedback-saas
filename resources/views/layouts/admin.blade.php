@@ -53,13 +53,16 @@
         >
 
             <div
-                class="grid h-11 w-11
-                       place-items-center
+                class="h-11 w-11 overflow-hidden
                        rounded-2xl
-                       bg-white/10
-                       text-xl"
+                       bg-white/10 p-1 flex items-center justify-center border border-white/20 shadow-inner"
             >
-                🌹
+                <img
+                    src="{{ asset('images/5rose/logo.png') }}"
+                    alt="5Rose Logo"
+                    class="h-full w-full object-contain rounded-xl"
+                    onerror="this.style.display='none'; this.parentElement.textContent='🌹';"
+                >
             </div>
 
 
@@ -93,12 +96,10 @@
                 href="{{ route('admin.dashboard') }}"
                 class="flex items-center
                        gap-3 rounded-2xl
+                       {{ request()->routeIs('admin.dashboard') ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/10 hover:text-white' }}
                        px-4 py-3
                        text-sm font-bold
-                       text-white/65
-                       transition
-                       hover:bg-white/10
-                       hover:text-white"
+                       transition"
             >
                 <span>⌂</span>
                 Dashboard
@@ -109,15 +110,41 @@
                 href="{{ route('admin.feedback.index') }}"
                 class="flex items-center
                        gap-3 rounded-2xl
-                       bg-white/10
+                       {{ request()->routeIs('admin.feedback.*') ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/10 hover:text-white' }}
                        px-4 py-3
                        text-sm font-bold
-                       text-white"
+                       transition"
             >
                 <span>✦</span>
                 Feedback
             </a>
 
+
+            <a
+                href="{{ route('admin.categories.index') }}"
+                class="flex items-center
+                       gap-3 rounded-2xl
+                       {{ request()->routeIs('admin.categories.*') ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/10 hover:text-white' }}
+                       px-4 py-3
+                       text-sm font-bold
+                       transition"
+            >
+                <span>🏷️</span>
+                Categories
+            </a>
+
+            <a
+                href="{{ route('admin.products.index') }}"
+                class="flex items-center
+                       gap-3 rounded-2xl
+                       {{ request()->routeIs('admin.products.*') ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/10 hover:text-white' }}
+                       px-4 py-3
+                       text-sm font-bold
+                       transition"
+            >
+                <span>🍔</span>
+                Products
+            </a>
 
             <div
                 class="pt-6 text-[9px]
@@ -125,33 +152,35 @@
                        tracking-[.17em]
                        text-white/25"
             >
-                COMING NEXT
+                SALES & POS
             </div>
 
-
-            <span
+            <a
+                href="{{ route('admin.orders.index') }}"
                 class="flex items-center
-                       gap-3 px-4 py-3
-                       text-sm text-white/30"
+                       gap-3 rounded-2xl
+                       {{ request()->routeIs('admin.orders.*') ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/10 hover:text-white' }}
+                       px-4 py-3
+                       text-sm font-bold
+                       transition"
             >
-                Products
-            </span>
+                <span>🧾</span>
+                Orders
+            </a>
 
-            <span
+            <a
+                href="{{ route('admin.pos.index') }}"
+                target="_blank"
                 class="flex items-center
-                       gap-3 px-4 py-3
-                       text-sm text-white/30"
+                       gap-3 rounded-2xl
+                       text-emerald-400 hover:bg-emerald-500/10 hover:text-emerald-300
+                       px-4 py-3
+                       text-sm font-bold
+                       transition"
             >
-                Gallery
-            </span>
-
-            <span
-                class="flex items-center
-                       gap-3 px-4 py-3
-                       text-sm text-white/30"
-            >
-                POS
-            </span>
+                <span>💻</span>
+                Open POS ↗
+            </a>
 
         </nav>
 
@@ -253,13 +282,16 @@
             >
 
                 <span
-                    class="grid h-10 w-10
-                           place-items-center
+                    class="h-10 w-10 overflow-hidden
                            rounded-xl
-                           bg-[#075b3a]
-                           text-lg"
+                           bg-white p-1 flex items-center justify-center border border-[#075b3a]/20 shadow-sm"
                 >
-                    🌹
+                    <img
+                        src="{{ asset('images/5rose/logo.png') }}"
+                        alt="5Rose Logo"
+                        class="h-full w-full object-contain rounded-lg"
+                        onerror="this.style.display='none'; this.parentElement.textContent='🌹';"
+                    >
                 </span>
 
                 <strong>
