@@ -6,7 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    protected $fillable = ['receipt_number', 'user_id', 'customer_id', 'subtotal', 'discount', 'takeaway_charge', 'total', 'amount_received', 'balance', 'payment_method', 'order_type', 'status'];
+    protected $fillable = [
+        'receipt_number',
+        'user_id',
+        'customer_id',
+        'subtotal',
+        'discount',
+        'takeaway_charge',
+        'total',
+        'amount_received',
+        'balance',
+        'payment_method',
+        'order_type',
+        'table_no',
+        'notes',
+        'status',
+    ];
 
     public function items()
     {
@@ -39,7 +54,11 @@ class Order extends Model
 
     public function getWhatsAppMessage(): string
     {
-        $this->loadMissing(['items', 'customer', 'user']);
+        if ($this->exists) {
+            $this->loadMissing(['items', 'customer', 'user']);
+        }
+
+        $items = $this->relationLoaded('items') ? $this->items : collect([]);
 
         $lines = [];
         $lines[] = "🧾 *5ROSE COOLSPOT - OFFICIAL RECEIPT*";
@@ -47,33 +66,47 @@ class Order extends Model
         $lines[] = "*Receipt #:* " . $this->receipt_number;
         $lines[] = "*Date:* " . ($this->created_at ? $this->created_at->format('d M Y, h:i A') : now()->format('d M Y, h:i A'));
         $lines[] = "*Order Type:* " . strtoupper(str_replace('_', ' ', $this->order_type ?? 'dine_in'));
-        if ($this->customer) {
+        if (!empty($this->table_no)) {
+            $lines[] = "*Table / Token:* " . $this->table_no;
+        }
+        if ($this->relationLoaded('customer') && $this->customer) {
             $custName = $this->customer->name ?? $this->customer->phone;
             if ($custName) {
                 $lines[] = "*Customer:* " . $custName;
             }
         }
-        if ($this->user) {
+        if ($this->relationLoaded('user') && $this->user) {
             $lines[] = "*Cashier:* " . $this->user->name;
         }
         $lines[] = "------------------------------------";
         $lines[] = "*Items Ordered:*";
-        foreach ($this->items as $item) {
-            $lines[] = "• " . $item->quantity . "x " . $item->product_name . " — Rs. " . number_format($item->line_total, 2);
+        foreach ($items as $item) {
+            $itemLine = "• " . $item->quantity . "x " . $item->product_name . " — Rs. " . number_format($item->line_total, 2);
+            if (!empty($item->notes)) {
+                $itemLine .= " _(" . $item->notes . ")_";
+            }
+            $lines[] = $itemLine;
         }
         $lines[] = "------------------------------------";
         $lines[] = "*Subtotal:* Rs. " . number_format($this->subtotal, 2);
         if ($this->takeaway_charge > 0) {
             $lines[] = "*Takeaway Charge:* Rs. " . number_format($this->takeaway_charge, 2);
         }
+        if ($this->discount > 0) {
+            $lines[] = "*Discount:* -Rs. " . number_format($this->discount, 2);
+        }
         $lines[] = "*TOTAL:* *Rs. " . number_format($this->total, 2) . "*";
         $lines[] = "*Payment:* " . strtoupper($this->payment_method ?? 'cash');
         if ($this->payment_method === 'cash' && $this->amount_received > 0) {
             $lines[] = "  (Paid: Rs. " . number_format($this->amount_received, 2) . " | Change: Rs. " . number_format($this->balance, 2) . ")";
         }
+        if (!empty($this->notes)) {
+            $lines[] = "*Note:* " . $this->notes;
+        }
         $lines[] = "━━━━━━━━━━━━━━━━━━━━";
         $lines[] = "Thank you for visiting *5Rose Coolspot*! 🌸";
-        $lines[] = "We'd love your feedback: " . url('/feedback');
+        $feedbackUrl = app()->bound('url') ? url('/feedback') : 'http://localhost/feedback';
+        $lines[] = "We'd love your feedback: " . $feedbackUrl;
 
         return implode("\n", $lines);
     }

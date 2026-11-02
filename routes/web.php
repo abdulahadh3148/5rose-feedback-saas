@@ -88,5 +88,7 @@ Route::middleware([
     Route::get('/pos', [PosController::class, 'index'])->name('pos.index');
     Route::post('/pos/checkout', [PosController::class, 'store'])->name('pos.store');
     Route::get('/pos/receipt/{order}', [PosController::class, 'receipt'])->name('pos.receipt');
+    Route::get('/pos/customers/search', [PosController::class, 'searchCustomer'])->name('pos.customers.search');
+    Route::get('/pos/daily-summary', [PosController::class, 'dailySummary'])->name('pos.daily_summary');
 
 });

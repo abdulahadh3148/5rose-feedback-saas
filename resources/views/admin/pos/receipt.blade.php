@@ -90,11 +90,14 @@
     </div>
 
     <div class="mb-2 border-bottom">
-        <div>Receipt: {{ $order->receipt_number }}</div>
+        <div>Receipt: <strong>{{ $order->receipt_number }}</strong></div>
         <div>Date: {{ $order->created_at->format('Y-m-d h:i A') }}</div>
-        <div>Type: {{ strtoupper(str_replace('_', ' ', $order->order_type)) }}</div>
+        <div>Type: <strong>{{ strtoupper(str_replace('_', ' ', $order->order_type)) }}</strong></div>
+        @if($order->table_no)
+            <div style="font-size: 13px; font-weight: bold; margin-top: 2px;">Table/Token: {{ $order->table_no }}</div>
+        @endif
         @if($order->customer)
-            <div>Customer: {{ $order->customer->name ?? $order->customer->phone }}</div>
+            <div>Customer: {{ $order->customer->name ?? $order->customer->phone }} ({{ $order->customer->phone }})</div>
         @endif
         <div>Cashier: {{ $order->user->name ?? 'Admin' }}</div>
     </div>
@@ -110,9 +113,14 @@
         <tbody>
             @foreach($order->items as $item)
             <tr>
-                <td>{{ $item->product_name }}</td>
-                <td class="text-center">{{ $item->quantity }}</td>
-                <td class="text-right">{{ number_format($item->line_total, 2) }}</td>
+                <td style="padding-top: 3px;">
+                    <div>{{ $item->product_name }}</div>
+                    @if(!empty($item->notes))
+                        <div style="font-size: 10px; font-style: italic; color: #444;">↳ {{ $item->notes }}</div>
+                    @endif
+                </td>
+                <td class="text-center" style="vertical-align: top; padding-top: 3px;">{{ $item->quantity }}</td>
+                <td class="text-right" style="vertical-align: top; padding-top: 3px;">{{ number_format($item->line_total, 2) }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -158,9 +166,16 @@
         </table>
     </div>
 
+    @if(!empty($order->notes))
+    <div class="border-bottom" style="font-size: 11px;">
+        <strong>Note:</strong> {{ $order->notes }}
+    </div>
+    @endif
+
     <div class="text-center footer">
-        <div>Thank you for visiting 5Rose!</div>
-        <div>Powered by 5Rose POS</div>
+        <div style="font-weight: bold; margin-bottom: 2px;">Thank you for visiting 5Rose Coolspot! 🌸</div>
+        <div style="font-size: 9px; color: #555;">Rate your experience: {{ url('/feedback') }}</div>
+        <div style="font-size: 9px; margin-top: 4px; color: #777;">Powered by 5Rose POS</div>
     </div>
 </body>
 </html>

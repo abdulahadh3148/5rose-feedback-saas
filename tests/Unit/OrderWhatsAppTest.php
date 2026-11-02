@@ -27,4 +27,20 @@ class OrderWhatsAppTest extends TestCase
         $formatted = $order->formatWhatsAppPhone('');
         $this->assertEquals('', $formatted);
     }
+
+    public function test_whatsapp_message_includes_table_and_items(): void
+    {
+        $order = new Order([
+            'receipt_number' => 'ORD-1234',
+            'order_type' => 'dine_in',
+            'table_no' => 'Table 5',
+            'subtotal' => 500,
+            'total' => 500,
+            'payment_method' => 'cash',
+        ]);
+
+        $message = $order->getWhatsAppMessage();
+        $this->assertStringContainsString('ORD-1234', $message);
+        $this->assertStringContainsString('Table 5', $message);
+    }
 }

@@ -18,6 +18,11 @@ php artisan view:cache || true
 if [ -n "$DB_HOST" ]; then
     echo "Running database migrations..."
     php artisan migrate --force --no-interaction || echo "Migration encountered an issue, continuing..."
+    
+    if [ "$SEED_DATABASE" = "true" ]; then
+        echo "Seeding initial database records..."
+        php artisan db:seed --force --no-interaction || echo "Seeding encountered an issue, continuing..."
+    fi
 fi
 
 # Start Apache in the foreground
